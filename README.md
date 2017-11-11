@@ -1,4 +1,4 @@
-# Vue Login
+# Vue Login with Avatar
 Login Example using Laravel Passport to access a Laravel API
 
 ## TODO
