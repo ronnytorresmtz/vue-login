@@ -8,7 +8,7 @@ export default {
     // Actions
     send: 'Send',
 
-    // *** Login ***
+    // Login
     signIn: 'Sign In',
     typeTheUsername: 'Type the username',
     typeThePassword: 'Type the password',
@@ -38,7 +38,7 @@ export default {
     logout: 'Cerrar Sessión',
     // Actions
     send: 'Enviar',
-    // Login 
+    // Login
     signIn: 'Accesar',
     typeTheUsername: 'Ingresa el usuarios',
     typeThePassword: 'Ingresa la constraseña',
