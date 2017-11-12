@@ -258,17 +258,6 @@
         store.dispatch(`${this.moduleName}/checkLogIn`, data);
       },
 
-      rememberMe() {
-        if (typeof (Storage) !== 'undefined') {
-          localStorage.setItem('rememberUserName', this.rememberMe ? this.username : '');
-        } else {
-          store.commit(`${this.moduleName}/SHOW_MESSAGE`, {
-            error: 'true',
-            message: 'This funcionality is not support for your browser',
-          });
-        }
-      },
-
       showEmailToSend() {
         this.forgotYourPassword = !this.forgotYourPassword;
       },
