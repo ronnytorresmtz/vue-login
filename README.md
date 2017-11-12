@@ -10,4 +10,4 @@ Vue Login with an Avatar using Laravel Passport to access a Laravel API using CO
 3. Integrate the Avatar Component to the Login Form Component
 4. Install Laravel Passport
 5. Interact with the Laravel API with Access Tokens using Laravel Passport
-6. Implements CORS.
+6. Implements CORS
