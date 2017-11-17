@@ -9,7 +9,7 @@ body {
 
 <template>
   <div id="app" style="margin:0px;">
-    
+    <!--topbar></topbar-->
     <router-view></router-view>
   </div>
 </template>
