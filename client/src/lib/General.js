@@ -31,6 +31,12 @@ GENERAL FUNCTION LIBRARY
         localStorage.setItem(key, value);
       }
     }
+    /*
+    * Get a Key Value in the Local Storage
+    */
+    export function getValueInLocalStorage(key) {
+      return localStorage.getItem(key);
+    }
      /*
     * Get the value of a Module/Key from the Local Storage
     */
