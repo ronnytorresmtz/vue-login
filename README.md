@@ -7,7 +7,7 @@ Vue Login with an Avatar using Laravel Passport to access a Laravel API using CO
 
 ## Functionality implemented
 1. Code a Vue Login Form Component
-2. Code a Avatar Component with this functionality
+2. Code a Avatar Component with these functionalities:
     * Search the email account in the gravatar service if exist display it
     * If email account is not found, show the first letter in uppercase as the avatar
     * if email account does not exist, display a question mark as the avatar
