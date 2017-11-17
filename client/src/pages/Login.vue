@@ -22,12 +22,30 @@
     border-bottom: solid 1px #eee;
   }
 
+   .brand {
+    text-align: left !important;
+    font-size: 22px;
+    padding-left: 20px;
+    padding-right: 50px;
+    line-height: 50px !important;
+    /*background-color: #337ab7;*/
+    line-height: 50px;
+    display: block;
+    text-align: center;
+    color: #e1ffff;
+    font-family: verdana;
+  }
  
 </style>
 
 <template>
 
   <div class="container-fluid">
+    <nav class="navbar navbar-default navbar-fixed-top" style="background:#3c8dbc" >
+    <div class="brand">
+      Brandname
+    </div>
+    </nav>
     <!--message component-->
     <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
       <mypopup v-if="showPopUpMessage"> </mypopup>
@@ -144,7 +162,7 @@
                             <button 
                               class="btn btn-sm btn-primary"  
                               style="width: 100px"
-                              :disabled="(email) ? false : true"
+                              :disabled="(email && !emailErrMessage) ? false : true"
                               @click="btnSendEmail"
                             >
                              {{ ts['send'] }} 
@@ -195,6 +213,7 @@
 </template>
 
 <script>
+  import client from '../../env';
   import store from '../store/Store';
   import mypopup from '../components/messages/Popup';
   import mylang from '../components/languages/Languages';
@@ -207,7 +226,6 @@
       myavatar,
       mypopup,
     },
-
 
     mixins: [mylang],
 
@@ -250,10 +268,13 @@
 
       login() {
         const data = {
+          client_id: client.client_id,
+          client_secret: client.client_secret,
+          grant_type: client.grant_type,
           username: this.username,
           password: this.password,
           rememberMe: this.rememberMe,
-          url: '/Companies',
+          url: '/Dashboard',
         };
         store.dispatch(`${this.moduleName}/checkLogIn`, data);
       },
