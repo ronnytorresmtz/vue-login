@@ -1,13 +1,13 @@
 <style scoped>
- a{
+  a {
     cursor: pointer;
   }
-  .error-email{
+  .error-email {
     color:red;
     font-size: 12px;
     font-style:italic;
   }
-  .component-center{
+  .component-center {
       display: block;
       margin-top: 100px;
   }
@@ -41,41 +41,50 @@
 <template>
 
   <div class="container-fluid">
+    
+    <!--blue topbar-->
     <nav class="navbar navbar-default navbar-fixed-top" style="background:#3c8dbc" >
     <div class="brand">
       Brandname
     </div>
     </nav>
+    <!--End blue topbar-->
+
     <!--message component-->
     <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
       <mypopup v-if="showPopUpMessage"> </mypopup>
     </transition>
-		<div class="row">
+    <!-- end message component-->
+		
+    <div class="row">
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4">
         <div class="panel component-center"> 
           <div class="panel-heading panel-dark">
             <div class="panel-title">
               <h3>{{ ts['signIn'] }}</h3>
-              <!--Spin Icon-->
             </div>
           </div> 
           <div class="panel-body body-height"> 
+            <!--display avatar-->
             <div class="row" align="center" style="margin-top:-50px">
-              <myavatar :email="username" 
-                        circleSize="80px" 
-                        letterSize="2em"
-                        background="black"
-                        color="white"
+              <myavatar 
+                :email="username" 
+                circleSize="80px" 
+                letterSize="2em"
+                background="black"
+                color="white"
               >
               </myavatar>
             </div>
+            <!--end display avatar-->
+
+            <!-- Username and password inputs -->
             <div class="row">
-              <!-- Username and password inputs -->
               <div class="col-sm-12 text-left" style="padding-top:10px">
                   <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">
-                      <i class="glyphicon glyphicon-user" ></i>
+                      <i class="glyphicon glyphicon-envelope"></i>
                     </span>			
                     <input 
                       type="text" 
@@ -90,7 +99,6 @@
                   </div>
                   <br>
               </div>
-           
               <div class="col-sm-12 text-left">
                   <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">
@@ -109,6 +117,7 @@
                   <br>
               </div>
             </div>
+            <!-- end Username and password inputs -->
 
             <!-- Remember me and forgot your password -->
             <div class="row">
@@ -127,8 +136,8 @@
               </div>
             </div>	
           </div>
-          
           <hr>
+          <!-- end Remember me and forgot your password -->
 
           <!-- Get your forgot password-->
            <div v-show="forgotYourPassword">
@@ -154,29 +163,25 @@
                   </div>
                   <span v-show="emailErrMessage" class="error-email">{{ ts['typeTheEmailError'] }}</span>
                   <hr>
-
-                    <div class="control-group" >
-                        <div class="row">
-                          <div class="col-sm-6" ></div>
-                          <div class="col-sm-6" align="right">
-                            <button 
-                              class="btn btn-sm btn-primary"  
-                              style="width: 100px"
-                              :disabled="(email && !emailErrMessage) ? false : true"
-                              @click="btnSendEmail"
-                            >
-                             {{ ts['send'] }} 
-                            </button>
-                          </div>			
-                        </div>	
-                    </div>	
-
+                  <div class="control-group" >
+                      <div class="row">
+                        <div class="col-sm-6" ></div>
+                        <div class="col-sm-6" align="right">
+                          <button 
+                            class="btn btn-sm btn-primary"  
+                            style="width: 100px"
+                            :disabled="(email && !emailErrMessage) ? false : true"
+                            @click="btnSendEmail"
+                          >
+                            {{ ts['send'] }} 
+                          </button>
+                        </div>			
+                      </div>	
+                  </div>	
               </div>
             </div>
           </div>
-
-          <!--Demo Button and Login Button--> 
-           <div class="control-group" v-show="!forgotYourPassword">
+          <div class="control-group" v-show="!forgotYourPassword">
             <div class="row">
               <div class="col-sm-6" align="left">
                 <button 
@@ -201,8 +206,9 @@
                 </button>
               </div>			
             </div>	
-        </div>	
-
+          </div>	
+        <!-- End Get your forgot password-->
+        
         </div> <!--end panel-body-->
       </div> <!--end panel-->
     </div> <!-- end col-sm-4-->
