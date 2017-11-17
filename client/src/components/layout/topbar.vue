@@ -8,18 +8,17 @@
     text-align: left !important;
     font-size: 22px;
     padding-left: 20px;
+    padding-right: 50px;
     line-height: 50px !important;
-    background-color: #337ab7;
+    /*background-color: #337ab7;*/
     line-height: 50px;
     display: block;
     text-align: center;
-    font-size: 14px;
     color: #e1ffff;
     font-family: verdana;
   }
+
 </style>
-
-
 
 <template>
   <div>
@@ -27,46 +26,47 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-xs-1">
-            <i class="fa fa-bars fa-md" 
+            <i class="fa fa-bars fa-md"
               style="margin-top:20px; color: white; cursor:pointer"
-              @click="expandCollapse"> 
+              @click="expandCollapse">
             </i>
           </div>
-          <div class="col-xs-11">
-            <div class="col-xs-8">
-            </div>
-            <div class="col-xs-4" align="right">
+            <div class="col-xs-9" align="right" style="padding-top:15px;">
                 <i class="fa fa-bell-o fa-md topbar-icons" aria-hidden="true"> </i>
                 <i class="fa fa-comment-o fa-md topbar-icons" aria-hidden="true"></i>
                 <i class="fa fa-flag-o fa-md topbar-icons" aria-hidden="true"></i>
-                <myavatar 
-                  email="ronnytorresmtz@gmail.com" 
-                  circle-size="32px" 
+            </div>
+            <div class="col-xs-1">
+                <myavatar
+                  :email="username"
+                  circle-size="32px"
                   letter-size="1.5em"
                   background="white"
                   color="black"
                   >
                 </myavatar>
-               <span style="padding-left:20px" @click="logout">
-                <i class="fa fa-power-off fa-md topbar-icons"
-                  aria-hidden="true"
-                  :title="ts['logout']"
-                > 
-                </i>
-               </span>
             </div>
-          </div>
-        </div>      
+               <div class="col-xs-1" style="padding-top:15px">
+                <span @click="logout">
+                  <i class="fa fa-power-off fa-md topbar-icons"
+                    aria-hidden="true"
+                    :title="ts['logout']"
+                  >
+                  </i>
+                </span>
+            </div>
+        </div>
       </div>
     </nav>
   </div>
 </template>
 
 <script>
-
+  import { getValueInLocalStorage } from '../../lib/General';
   import store from '../../store/Store';
   import myavatar from '../../components/layout/avatar';
   import mylang from '../../components/languages/Languages';
+  
 
   export default {
 
@@ -74,6 +74,11 @@
 
     components: {
       myavatar,
+      username: '',
+    },
+
+    created() {
+      this.username = getValueInLocalStorage('username');
     },
 
     data() {
