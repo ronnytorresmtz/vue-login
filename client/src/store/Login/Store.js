@@ -2,12 +2,14 @@
 // import Vue from 'vue';
 import Axios from 'axios';
 import router from '../../router';
+import Auth from '../../lib/Auth';
+import { storeInLocalStorage } from '../../lib/General';
 
 const store = {
   namespaced: true,
   state: {
     moduleName: 'Login',
-    baseUrlLogin: 'http://localhost:8000/api/',
+    baseUrlServer: 'http://localhost:8000/',
     loading: false,
     showPopUpMessage: false,
     message: {
@@ -41,44 +43,48 @@ const store = {
   actions: {
     checkLogIn(context, data) {
       context.commit('UPDATE_LOADING', true);
-      const baseUrl = context.getters.getBaseUrlLogin;
-      return Axios.post(`${baseUrl}login/logIn`, { username: data.username, password: data.password, remember_me: data.rememberMe })
+      const baseUrl = context.getters.getBaseUrlServer;
+      return Axios.post(`${baseUrl}oauth/token`, data)
       .then((response) => {
-        if (response.data.error === false) {
-          localStorage.setItem('rememberUserName', (data.rememberMe) ? data.username : '');
+        if (response.status === 200) {
+          Auth.setToken(response.data);
+          Auth.setRememberMe(data);
           router.push(data.url);
+          storeInLocalStorage('username', data.username);
           context.commit('UPDATE_LOADING', false);
         } else {
           context.commit('SHOW_MESSAGE', response);
           context.commit('UPDATE_LOADING', false);
         }
-      }).catch((error) => {
-        context.commit('SHOW_MESSAGE_ERROR', error.message);
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          context.commit('SHOW_MESSAGE_ERROR', 'Username or password is incorrect');
+        } else {
+          context.commit('SHOW_MESSAGE_ERROR', error.message);
+        }
         context.commit('UPDATE_LOADING', false);
       });
     },
     sendEmail(context, email) {
-      context.commit('UPDATE_LOADING', true);
-      const baseUrl = context.getters.getBaseUrlLogin;
-      return Axios.post(`${baseUrl}login/sendYourPassword`, { email })
-      .then((response) => {
-        context.commit('SHOW_MESSAGE', response);
-        context.commit('UPDATE_LOADING', false);
-      })
-      .catch((error) => {
-        context.commit('SHOW_MESSAGE_ERROR', error.message);
-        context.commit('UPDATE_LOADING', false);
-      });
+      const response = { data: { error: true, message: `Pending to CODE the sending mail with a token to reset the username if it exists in the user table: ${email}` } };
+      context.commit('SHOW_MESSAGE', response);
+      // context.commit('UPDATE_LOADING', true);
+      // const baseUrl = context.getters.getBaseUrlServer;
+      // return Axios.post(`${baseUrl}login/sendYourPassword`, { email })
+      // .then((response) => {
+      //   context.commit('SHOW_MESSAGE', response);
+      //   context.commit('UPDATE_LOADING', false);
+      // })
+      // .catch((error) => {
+      //   context.commit('SHOW_MESSAGE_ERROR', error.message);
+      //   context.commit('UPDATE_LOADING', false);
+      // });
     },
     logout(context) {
-      const baseUrl = context.getters.getBaseUrlLogin;
-      return Axios.get(`${baseUrl}login/logOut`)
-      .then((response) => {
-        router.push(response.data.url);
-      })
-      .catch((error) => {
-        context.commit('SHOW_MESSAGE_ERROR', error.message);
-      });
+      Auth.destroyToken();
+      router.push('/Login');
+      context.commit('UPDATE_LOADING', false);
     },
   },
   getters: {
@@ -86,7 +92,7 @@ const store = {
     getShowPopUpMessage: state => state.showPopUpMessage,
     getShowMessage: state => state.message.show,
     getLoading: state => state.loading,
-    getBaseUrlLogin: state => state.baseUrlLogin,
+    getBaseUrlServer: state => state.baseUrlServer,
   },
 };
 
