@@ -62,7 +62,7 @@
     methods: {
       getAvatar() {
         this.gravatarEmail = this.email;
-        if (isValidEmail(this.gravatarEmail)) {
+        if (isValidEmail(this.gravatarEmail) && (this.gravatarEmail)) {
           const hash = md5(this.gravatarEmail);
           this.gravatarUrl = `https://www.gravatar.com/avatar/${hash}?s=${this.circleSize}&d=404`;
           Axios.get(this.gravatarUrl)
@@ -79,7 +79,10 @@
       },
 
       getFirstLetterFromEmail() {
-        return (this.gravatarEmail === null) ? '?' : this.gravatarEmail[0].toUpperCase();
+        if (this.gravatarEmail) {
+          return this.gravatarEmail[0].toUpperCase();
+        }
+        return '?';
       },
 
       isValidEmail(email) {
