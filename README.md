@@ -1,6 +1,10 @@
 # Vue Login with an Avatar
 Vue Login with an Avatar using Laravel Passport to access a Laravel API using CORS
 
+<p align="center">
+<img src="example.png" width="300px" >
+</p>
+
 ## Functionality implemented
 1. Code a Vue Login Form Component
 2. Code a Avatar Component with this functionality
