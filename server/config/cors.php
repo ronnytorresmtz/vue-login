@@ -13,10 +13,11 @@ return [
     */
    
     'supportsCredentials' => false,
-    'allowedOrigins' => ['*'],
-    'allowedHeaders' => ['Content-Type', 'X-Requested-With'],
-    'allowedMethods' => ['*'], // ex: ['GET', 'POST', 'PUT',  'DELETE']
+    'allowedOrigins' => ['http://localhost:8000', 'http://localhost:8080'], //'*' allow any
+    'allowedHeaders' => ['Origin', 'Content-Type', 'Authorization'], //'*' allow any
+    'allowedMethods' => ['GET', 'PUT', 'POST', 'DELETE', 'HEAD'], //'*' allow any
     'exposedHeaders' => [],
     'maxAge' => 0,
+    'hosts' => [],
 
 ];
