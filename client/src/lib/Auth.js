@@ -26,7 +26,7 @@ const Auth = {
     return false;
   },
   getAuthHeader() {
-    return `Authorization: Bearer ${this.getToken()}`;
+    return `Bearer ${this.getToken()}`;
   },
   setRememberMe(data) {
     localStorage.setItem('rememberUserName', (data.rememberMe) ? data.username : '');
