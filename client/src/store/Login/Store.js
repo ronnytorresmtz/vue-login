@@ -58,7 +58,7 @@ const store = {
         }
       })
       .catch((error) => {
-        if (error.response.status === 401) {
+        if (error.status === 401) {
           context.commit('SHOW_MESSAGE_ERROR', 'Username or password is incorrect');
         } else {
           context.commit('SHOW_MESSAGE_ERROR', error.message);
