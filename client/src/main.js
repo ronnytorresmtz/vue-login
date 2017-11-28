@@ -9,8 +9,8 @@ Vue.config.productionTip = false;
 
 Axios.interceptors.request.use((config) => {
   const request = config;
-  if (Auth.getToken() !== null) {
-    request.headers.accept = 'application/json, text/plain, */*';
+  // if the url contains gravatar does not add the access_token
+  if (Auth.getToken() !== null && (config.url).search('gravatar') === -1) {
     request.headers.authorization = Auth.getAuthHeader();
   }
   return request;
