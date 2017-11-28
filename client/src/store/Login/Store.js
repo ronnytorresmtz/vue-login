@@ -53,16 +53,12 @@ const store = {
           storeInLocalStorage('username', data.username);
           context.commit('UPDATE_LOADING', false);
         } else {
-          context.commit('SHOW_MESSAGE', response);
+          context.commit('SHOW_MESSAGE_ERROR', 'Username or password is incorrect');
           context.commit('UPDATE_LOADING', false);
         }
       })
-      .catch((error) => {
-        if (error.status === 401) {
-          context.commit('SHOW_MESSAGE_ERROR', 'Username or password is incorrect');
-        } else {
-          context.commit('SHOW_MESSAGE_ERROR', error.message);
-        }
+      .catch(() => {
+        context.commit('SHOW_MESSAGE_ERROR', 'Username or password is incorrect');
         context.commit('UPDATE_LOADING', false);
       });
     },
@@ -82,9 +78,23 @@ const store = {
       // });
     },
     logout(context) {
-      Auth.destroyToken();
-      router.push('/Login');
-      context.commit('UPDATE_LOADING', false);
+      context.commit('UPDATE_LOADING', true);
+      const baseUrl = context.getters.getBaseUrlServer;
+      return Axios.get(`${baseUrl}api/logout`)
+      .then((response) => {
+        if (response.status === 200) {
+          Auth.destroyToken();
+          router.push('/Login');
+          context.commit('UPDATE_LOADING', false);
+        } else {
+          context.commit('SHOW_MESSAGE', response);
+          context.commit('UPDATE_LOADING', false);
+        }
+      })
+      .catch((error) => {
+        context.commit('SHOW_MESSAGE_ERROR', error.message);
+        context.commit('UPDATE_LOADING', false);
+      });
     },
   },
   getters: {
