@@ -63,7 +63,7 @@ const store = {
       });
     },
     sendEmail(context, email) {
-      const response = { data: { error: true, message: `Pending to CODE the sending mail with a token to reset the username if it exists in the user table: ${email}` } };
+      const response = { data: { error: true, message: `Pending to CODE the sending mail process with a token to reset the username if it exists in the user table: ${email}` } };
       context.commit('SHOW_MESSAGE', response);
       // context.commit('UPDATE_LOADING', true);
       // const baseUrl = context.getters.getBaseUrlServer;
@@ -79,22 +79,9 @@ const store = {
     },
     logout(context) {
       context.commit('UPDATE_LOADING', true);
-      const baseUrl = context.getters.getBaseUrlServer;
-      return Axios.get(`${baseUrl}api/logout`)
-      .then((response) => {
-        if (response.status === 200) {
-          Auth.destroyToken();
-          router.push('/Login');
-          context.commit('UPDATE_LOADING', false);
-        } else {
-          context.commit('SHOW_MESSAGE', response);
-          context.commit('UPDATE_LOADING', false);
-        }
-      })
-      .catch((error) => {
-        context.commit('SHOW_MESSAGE_ERROR', error.message);
-        context.commit('UPDATE_LOADING', false);
-      });
+      Auth.destroyToken();
+      router.push('/Login');
+      context.commit('UPDATE_LOADING', false);
     },
   },
   getters: {
