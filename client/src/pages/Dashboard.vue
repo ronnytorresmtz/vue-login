@@ -78,7 +78,7 @@
         <th>NAME</th>
         <th>EMAIL</th>
         <tbody>
-          <tr v-for="user in info.users">
+          <tr v-for="user in info.users" :key="user.id" >
             <td>{{user.id}}</td>
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
