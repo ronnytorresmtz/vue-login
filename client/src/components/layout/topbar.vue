@@ -25,12 +25,12 @@
     <nav class="navbar navbar-default navbar-fixed-top" style="background:#3c8dbc" >
       <div class="container-fluid">
         <div class="row">
-          <div class="col-xs-1">
-            <i class="fa fa-bars fa-md"
-              style="margin-top:20px; color: white; cursor:pointer"
-              @click="expandCollapse">
-            </i>
-          </div>
+            <div class="col-xs-1">
+              <i class="fa fa-bars fa-md"
+                style="margin-top:20px; color: white; cursor:pointer"
+                @click="expandCollapse">
+              </i>
+            </div>
             <div class="col-xs-9" align="right" style="padding-top:15px;">
                 <i class="fa fa-bell-o fa-md topbar-icons" aria-hidden="true"> </i>
                 <i class="fa fa-comment-o fa-md topbar-icons" aria-hidden="true"></i>
