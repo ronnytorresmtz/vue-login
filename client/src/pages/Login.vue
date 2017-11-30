@@ -35,13 +35,13 @@
     color: #e1ffff;
     font-family: verdana;
   }
- 
+
 </style>
 
 <template>
 
   <div class="container-fluid">
-    
+
     <!--blue topbar-->
     <nav class="navbar navbar-default navbar-fixed-top" style="background:#3c8dbc" >
     <div class="brand">
@@ -55,22 +55,22 @@
       <mypopup v-if="showPopUpMessage"> </mypopup>
     </transition>
     <!-- end message component-->
-		
+
     <div class="row">
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4">
-        <div class="panel component-center"> 
+        <div class="panel component-center">
           <div class="panel-heading panel-dark">
             <div class="panel-title">
               <h3>{{ ts['signIn'] }}</h3>
             </div>
-          </div> 
-          <div class="panel-body body-height"> 
+          </div>
+          <div class="panel-body body-height">
             <!--display avatar-->
             <div class="row" align="center" style="margin-top:-50px">
-              <myavatar 
-                :email="username" 
-                circleSize="80px" 
+              <myavatar
+                :email="username"
+                circleSize="80px"
                 letterSize="2em"
                 background="black"
                 color="white"
@@ -85,12 +85,12 @@
                   <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">
                       <i class="glyphicon glyphicon-envelope"></i>
-                    </span>			
-                    <input 
-                      type="text" 
+                    </span>
+                    <input
+                      type="text"
                       v-model="username"
-                      name="username" 
-                      id="username" 
+                      name="username"
+                      id="username"
                       class ="form-control"
                       :placeholder="ts['typeTheUsername']"
                       value=""
@@ -103,12 +103,12 @@
                   <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">
                       <i class="glyphicon glyphicon-lock" ></i>
-                    </span>			
-                    <input 
-                      type="password" 
+                    </span>
+                    <input
+                      type="password"
                       v-model="password"
-                      name="password" 
-                      id="password" 
+                      name="password"
+                      id="password"
                       class ="form-control"
                       :placeholder="ts['typeThePassword']"
                       value="">
@@ -125,16 +125,16 @@
               <div class="control-group" >
                 <input type="checkbox" v-model="rememberMe"></input>
                 {{ ts['rememberMe'] }}
-              </div>	
-            </div>	
-                      
+              </div>
+            </div>
+
             <div class="col-sm-6 text-right">
               <div class="control-group"  >
                 <a @click="showEmailToSend">
                 {{ ts['forgotYourPassword'] }}
-                </a>	
+                </a>
               </div>
-            </div>	
+            </div>
           </div>
           <hr>
           <!-- end Remember me and forgot your password -->
@@ -150,12 +150,12 @@
                   <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">
                       <i class="glyphicon glyphicon-envelope" ></i>
-                    </span>			
-                    <input 
-                      type="email" 
+                    </span>
+                    <input
+                      type="email"
                       v-model="email"
-                      name="email" 
-                      id="email" 
+                      name="email"
+                      id="email"
                       class ="form-control"
                       :placeholder="ts['typeTheEmailAddress']"
                       value="">
@@ -167,34 +167,34 @@
                       <div class="row">
                         <div class="col-sm-6" ></div>
                         <div class="col-sm-6" align="right">
-                          <button 
-                            class="btn btn-sm btn-primary"  
+                          <button
+                            class="btn btn-sm btn-primary"
                             style="width: 100px"
                             :disabled="(email && !emailErrMessage) ? false : true"
                             @click="btnSendEmail"
                           >
-                            {{ ts['send'] }} 
+                            {{ ts['send'] }}
                           </button>
-                        </div>			
-                      </div>	
-                  </div>	
+                        </div>
+                      </div>
+                  </div>
               </div>
             </div>
           </div>
           <div class="control-group" v-show="!forgotYourPassword">
             <div class="row">
               <div class="col-sm-6" align="left">
-                <button 
+                <button
                   class="btn btn-sm btn-success"
                   @click="loginDemo"
-                > 
-                 {{ ts['loginUserDemo'] }} 
+                >
+                 {{ ts['loginUserDemo'] }}
                 </button>
               </div>
 
               <div class="col-sm-6" align="right">
-                <button 
-                class="btn btn-sm btn-primary"  
+                <button
+                class="btn btn-sm btn-primary"
                 style="width: 100px"
                 :disabled="(username && password) ? false : true"
                 @click="login"
@@ -204,11 +204,11 @@
                 </span>
                 {{ ts['signIn'] }}
                 </button>
-              </div>			
-            </div>	
-          </div>	
+              </div>
+            </div>
+          </div>
         <!-- End Get your forgot password-->
-        
+
         </div> <!--end panel-body-->
       </div> <!--end panel-->
     </div> <!-- end col-sm-4-->
